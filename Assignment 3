@@ -1,0 +1,117 @@
+1. Display first name, last name and salary of employees whose salary is not in the range 10,000 to 15,000.
+--> SELECT first_name, last_name, salary FROM employees WHERE salary NOT BETWEEN 10000 AND 15000;
+Output:
++------------+-----------+--------+
+| first_name | last_name | salary |
++------------+-----------+--------+
+| Steven     | King      | 24000  |
+| Lex        | De Haan   | 17000  |
+| Alexander  | Hunold    | 9000   |
++------------+-----------+--------+
+
+2. Display first name, last name and department ID of employees in departments 30 or 100, in ascending order.
+--> SELECT first_name, last_name, department_id FROM employees WHERE department_id IN (30, 100) ORDER BY department_id ASC;
+Output:
++------------+-----------+---------------+
+| first_name | last_name | department_id |
++------------+-----------+---------------+
+| Den        | Raphaely  | 30            |
+| Alexander  | Khoo      | 30            |
+| Nancy      | Greenberg | 100           |
++------------+-----------+---------------+
+
+3. Display first name, last name and salary of employees whose salary is outside 10,000–15,000 and who work in department 30 or 100.
+--> SELECT first_name, last_name, salary FROM employees WHERE salary NOT BETWEEN 10000 AND 15000 AND department_id IN (30, 100);
+Output:
++------------+-----------+--------+
+| first_name | last_name | salary |
++------------+-----------+--------+
+| Den        | Raphaely  | 11000  |
+| Nancy      | Greenberg | 12000  |
++------------+-----------+--------+
+
+4. Display first name, last name and hire date of employees hired in 1987.
+--> SELECT first_name, last_name, hire_date FROM employees WHERE YEAR(hire_date) = 1987;
+Output:
++------------+-----------+------------+
+| first_name | last_name | hire_date  |
++------------+-----------+------------+
+| Steven     | King      | 1987-06-17 |
+| Neena      | Kochhar   | 1987-09-21 |
++------------+-----------+------------+
+
+5. Display first names containing both b and c.
+--> SELECT first_name FROM employees WHERE first_name LIKE '%b%' AND first_name LIKE '%c%';
+Output:
++------------+
+| first_name |
++------------+
+| Elizabeth  |
++------------+
+
+6. Display last name, job and salary of Programmers or Shipping Clerks whose salary is not 4500, 10000 or 15000.
+--> SELECT last_name, job_id, salary FROM employees WHERE job_id IN ('IT_PROG', 'SH_CLERK') AND salary NOT IN (4500, 10000, 15000);
+Output:
++-----------+------------+--------+
+| last_name | job_id     | salary |
++-----------+------------+--------+
+| Hunold    | IT_PROG    | 9000   |
+| Ernst     | IT_PROG    | 6000   |
+| Austin    | IT_PROG    | 4800   |
+| Taylor    | SH_CLERK   | 3200   |
++-----------+------------+--------+
+
+7. Display last names containing exactly six characters.
+--> SELECT last_name FROM employees WHERE last_name LIKE '______';
+Output:
++-----------+
+| last_name |
++-----------+
+| Austin    |
+| Greenberg |
++-----------+
+
+8. Display last names having e as the third character.
+--> SELECT last_name FROM employees WHERE last_name LIKE '__e%';
+Output:
++-----------+
+| last_name |
++-----------+
+| Greenberg |
+| Greene    |
+| Geoni     |
++-----------+
+
+9. Display the jobs/designations available in the employees table.
+--> SELECT DISTINCT job_id FROM employees;
+Output:
++------------+
+| job_id     |
++------------+
+| AD_PRES    |
+| AD_VP      |
+| IT_PROG    |
+| SH_CLERK   |
+| SA_REP     |
++------------+
+
+10. Display first name, last name, salary and PF (15% of salary) of all employees.
+--> SELECT first_name, last_name, salary, salary * 0.15 AS PF FROM employees;
+Output:
++------------+-----------+--------+---------+
+| first_name | last_name | salary | PF      |
++------------+-----------+--------+---------+
+| Steven     | King      | 24000  | 3600.00 |
+| Neena      | Kochhar   | 17000  | 2550.00 |
+| Lex        | De Haan   | 17000  | 2550.00 |
++------------+-----------+--------+---------+
+
+11. Display all records from employees whose last name is BLAKE, SCOTT, KING or FORD.
+--> SELECT * FROM employees WHERE last_name IN ('BLAKE', 'SCOTT', 'KING', 'FORD');
+Output:
++-------------+------------+-----------+------------+--------+
+| employee_id | first_name | last_name | job_id     | salary |
++-------------+------------+-----------+------------+--------+
+| 100         | Steven     | King      | AD_PRES    | 24000  |
+| 108         | Nancy      | Greenberg | FI_MGR     | 12000  |
++-------------+------------+-----------+------------+--------+
