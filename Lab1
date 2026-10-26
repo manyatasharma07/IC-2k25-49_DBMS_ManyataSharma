@@ -30,3 +30,53 @@ Output: Query OK, 0 rows affected (0.03 sec)
 8. Create table  name "job_history"
 -->  create table job_histry(employee_id int, start_date date, end_date date, job_id varchar(10), department_id int);
 Output: Query OK, 0 rows affected (0.03 sec)
+
+9. Create a table countries where duplicate values in country_id are not allowed.
+--> CREATE TABLE countries (country_id INT UNIQUE, country_name VARCHAR(20), region_id INT);
+Output: Query OK, 0 rows affected (0.02 sec)
+
+10. Create a table named jobs with default values.
+--> CREATE TABLE jobs (job_id INT, job_title VARCHAR(35) NOT NULL DEFAULT ' ', min_salary DECIMAL(6,0) DEFAULT 8000, max_salary DECIMAL(6,0) DEFAULT NULL);
+Output: Query OK, 0 rows affected (0.03 sec)
+
+11. Create a table countries where country_id is a primary key.
+--> CREATE TABLE countries (country_id INT PRIMARY KEY, country_name VARCHAR(20), region_id INT);
+Output: Query OK, 0 rows affected (0.03 sec)
+
+12. Create a table countries where country_id is unique and auto-incremented.
+--> CREATE TABLE countries (country_id INT UNIQUE AUTO_INCREMENT, country_name VARCHAR(20), region_id INT);
+Output: Query OK, 0 rows affected (0.01 sec)
+
+13. Create a table countries where the combination of country_id and region_id is unique.
+--> CREATE TABLE countries (country_id INT, country_name VARCHAR(20), region_id INT, UNIQUE (country_id, region_id));
+Output: Query OK, 0 rows affected (0.03 sec)
+
+14. Create a table named job_history where employee_id is unique and job_id is a foreign key.
+--> CREATE TABLE job_history (employee_id INT UNIQUE, start_date DATE, end_date DATE, job_id VARCHAR(10), department_id INT, FOREIGN KEY (job_id) REFERENCES jobs(job_id));
+Output: Query OK, 0 rows affected (0.03 sec)
+
+15. Create a table named employees where employee_id is unique and the combination of department_id and manager_id references departments.
+--> CREATE TABLE employees (employee_id INT UNIQUE, first_name VARCHAR(20), last_name VARCHAR(25), email VARCHAR(25), phone_number VARCHAR(20), hire_date DATE, job_id VARCHAR(10), 
+salary DECIMAL(8,2), commission DECIMAL(4,2), manager_id DECIMAL(6,0), department_id DECIMAL(4,0), FOREIGN KEY (department_id, manager_id) REFERENCES departments(department_id, manager_id));
+Output: Query OK, 0 rows affected (0.02 sec)
+
+16. Create a table named employees with foreign keys referencing departments and jobs.
+--> CREATE TABLE employees (employee_id INT UNIQUE, first_name VARCHAR(20), last_name VARCHAR(25), email VARCHAR(25), phone_number VARCHAR(20), hire_date DATE, job_id VARCHAR(10), salary DECIMAL(8,2),commission DECIMAL(4,2), 
+manager_id DECIMAL(6,0), department_id DECIMAL(4,0), FOREIGN KEY (department_id) REFERENCES departments(department_id), FOREIGN KEY (job_id) REFERENCES jobs(job_id)) ENGINE=InnoDB;
+Output: Query OK, 0 rows affected (0.03 sec)
+
+17. Create a table named employees using ON UPDATE CASCADE and ON DELETE RESTRICT.
+--> CREATE TABLE employees (employee_id INT UNIQUE, first_name VARCHAR(20), last_name VARCHAR(25), job_id INT, salary DECIMAL(8,2), FOREIGN KEY (job_id) REFERENCES jobs(job_id) ON UPDATE CASCADE ON DELETE RESTRICT) ENGINE=InnoDB;
+Output: Query OK, 0 rows affected (0.03 sec)
+
+18. Create a table named employees using ON DELETE CASCADE and ON UPDATE RESTRICT.
+--> CREATE TABLE employees (employee_id INT UNIQUE, first_name VARCHAR(20), last_name VARCHAR(25), job_id INT, salary DECIMAL(8,2), FOREIGN KEY (job_id) REFERENCES jobs(job_id) ON DELETE CASCADE ON UPDATE RESTRICT) ENGINE=InnoDB;
+Output: Query OK, 0 rows affected (0.03 sec)
+
+19. Create a table named employees using ON DELETE SET NULL and ON UPDATE SET NULL.
+--> CREATE TABLE employees (employee_id INT UNIQUE, first_name VARCHAR(20), last_name VARCHAR(25), job_id INT NULL, salary DECIMAL(8,2), FOREIGN KEY (job_id) REFERENCES jobs(job_id) ON DELETE SET NULL ON UPDATE SET NULL) ENGINE=InnoDB;
+Output: Query OK, 0 rows affected (0.03 sec)
+
+20. Create a table named employees using ON DELETE NO ACTION and ON UPDATE NO ACTION.
+--> CREATE TABLE employees (employee_id INT UNIQUE, first_name VARCHAR(20), last_name VARCHAR(25), job_id INT, salary DECIMAL(8,2), FOREIGN KEY (job_id) REFERENCES jobs(job_id) ON DELETE NO ACTION ON UPDATE NO ACTION) ENGINE=InnoDB;
+Output: Query OK, 0 rows affected (0.02 sec)
